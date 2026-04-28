@@ -11,7 +11,9 @@ mkdir -p ~/.local/share/fonts/
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/RobotoMono.zip
-
+# Greenclip
+wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip -O ~/.local/bin/greenclip
+chmod +x ~/.local/bin/greenclip
 
 unzip Iosevka.zip -d ~/.local/share/fonts/
 unzip RobotoMono.zip -d ~/.local/share/fonts/
@@ -37,6 +39,7 @@ mkdir -p ~/.config/compton
 mkdir -p ~/.config/rofi
 mkdir -p ~/.config/alacritty
 mkdir -p ~/.config/i3/scripts
+mkdir -p ~/.config/kitty
 cp .config/i3/config ~/.config/i3/config
 cp .config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 cp .config/i3/i3blocks.conf ~/.config/i3/i3blocks.conf
@@ -46,7 +49,7 @@ cp -R .config/i3/scripts/ ~/.config/i3/scripts/
 cp .fehbg ~/.fehbg
 cp .config/i3/clipboard_fix.sh ~/.config/i3/clipboard_fix.sh
 cp -r .wallpaper ~/.wallpaper 
-
+cp .
 echo "Done! Grab some wallpaper and run pywal -i filename to set your color scheme. To have the wallpaper set on every boot edit ~.fehbg"
 echo "After reboot: Select i3 on login, run lxappearance and select arc-dark"
 

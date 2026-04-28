@@ -1,0 +1,196 @@
+# ╔══════════════════════════════════════════════╗
+# ║           i3 config — D4rkC4rl               ║
+# ║           Theme: HackTheBox / Dark           ║
+# ╚══════════════════════════════════════════════╝
+
+# ── Variables ─────────────────────────────────────
+set $mod Mod1
+
+set $ws1  "I"
+set $ws2  "II"
+set $ws3  "III"
+set $ws4  "IV"
+set $ws5  "V"
+set $ws6  "VI"
+set $ws7  "VII"
+set $ws8  "VIII"
+set $ws9  "IX"
+set $ws10 "X"
+
+# ── Couleurs HTB ──────────────────────────────────
+set $htb_bg      #1a2332
+set $htb_green   #9fef00
+set $htb_cyan    #2ee7b6
+set $htb_text    #a4b1cd
+set $htb_dim     #313f55
+set $htb_red     #ff3e3e
+set $htb_black   #000000
+
+# ── Apparence générale ────────────────────────────
+font pango:Iosevka Nerd Font Regular 9
+
+for_window [class="^.*"] border pixel 2
+gaps inner 6
+gaps outer 6
+smart_gaps on
+
+# Couleurs fenêtres
+#                       border        background    text          indicator     child_border
+client.focused          $htb_green    $htb_green    $htb_black    $htb_cyan     $htb_green
+client.focused_inactive $htb_dim      $htb_dim      $htb_text     $htb_dim      $htb_dim
+client.unfocused        $htb_bg       $htb_bg       $htb_dim      $htb_bg       $htb_bg
+client.urgent           $htb_red      $htb_red      #ffffff       $htb_red      $htb_red
+
+# ── Comportement souris ───────────────────────────
+floating_modifier $mod
+focus_follows_mouse no
+
+# ── Applications ──────────────────────────────────
+bindsym $mod+Return       exec kitty
+bindsym $mod+d            exec "rofi -show run"
+bindsym $mod+Shift+w      exec rofi -modi "clipboard:greenclip print" -show clipboard
+bindsym $mod+C            exec flameshot gui
+
+# ── Fenêtres ──────────────────────────────────────
+bindsym $mod+Shift+q kill
+
+# Focus (vim-style)
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Focus (flèches)
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+# Déplacement (vim-style)
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Déplacement (flèches)
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+# ── Layout ────────────────────────────────────────
+bindsym $mod+b        split h
+bindsym $mod+v        split v
+bindsym $mod+f        fullscreen toggle
+bindsym $mod+s        layout stacking
+bindsym $mod+w        layout tabbed
+bindsym $mod+e        layout toggle split
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space    focus mode_toggle
+bindsym $mod+a        focus parent
+
+# ── Workspaces ────────────────────────────────────
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# Navigation rapide entre workspaces
+bindsym $mod+Tab       workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# ── i3 meta ───────────────────────────────────────
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Quitter i3 ?' -b 'Oui' 'i3-msg exit'"
+
+# ── Resize ────────────────────────────────────────
+mode "resize" {
+    bindsym h     resize shrink width  10 px or 10 ppt
+    bindsym j     resize grow   height 10 px or 10 ppt
+    bindsym k     resize shrink height 10 px or 10 ppt
+    bindsym l     resize grow   width  10 px or 10 ppt
+
+    bindsym Left  resize shrink width  10 px or 10 ppt
+    bindsym Down  resize grow   height 10 px or 10 ppt
+    bindsym Up    resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow   width  10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Resize direct (sans mode)
+bindsym $mod+Ctrl+Shift+Right resize shrink width  10 px or 10 ppt
+bindsym $mod+Ctrl+Shift+Up    resize grow   height 10 px or 10 ppt
+bindsym $mod+Ctrl+Shift+Down  resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+Shift+Left  resize grow   width  10 px or 10 ppt
+
+# ── Multiscreen ───────────────────────────────────
+bindsym $mod+p         exec ~/.config/i3/scripts/screen-mirror.sh
+bindsym $mod+Shift+p   exec ~/.config/i3/scripts/screen-extend.sh
+bindsym $mod+ctrl+p    exec ~/.config/i3/scripts/screen-off.sh
+
+# ── Présentation ──────────────────────────────────
+bindsym $mod+F9  exec ~/.config/i3/scripts/presentation-on.sh
+bindsym $mod+F10 exec ~/.config/i3/scripts/presentation-off.sh
+
+# ── Lockscreen ────────────────────────────────────
+bindsym $mod+Shift+x exec betterlockscreen -l ~/.wallpaper/24.png --text "D4rkC4rl | Locked"
+
+# ── Luminosité & Volume ───────────────────────────
+bindsym XF86MonBrightnessUp   exec brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+
+bindsym XF86AudioRaiseVolume  exec pamixer -i 5
+bindsym XF86AudioLowerVolume  exec pamixer -d 5
+bindsym XF86AudioMute         exec pamixer -t
+
+# ── Barre ─────────────────────────────────────────
+bar {
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    i3bar_command  i3bar -t
+    position       top
+    height         24
+    font           pango:Iosevka Nerd Font Regular 8
+
+    colors {
+        background         #1a233288
+        statusline         #a4b1cd
+        separator          #313f55
+
+        # classe              border      background  texte
+        focused_workspace   #9fef0088   #9fef0022   #9fef00
+        active_workspace    #313f5588   #313f5522   #a4b1cd
+        inactive_workspace  #1a233288   #1a233200   #313f55
+        urgent_workspace    #ff3e3e88   #ff3e3e22   #ff3e3e
+    }
+}
+
+# ── Autostart ─────────────────────────────────────
+exec_always --no-startup-id sh ~/.fehbg
+exec_always --no-startup-id picom --config ~/.config/picom/picom.conf -b
+exec_always --no-startup-id ~/.config/i3/clipboard_fix.sh
+
+exec --no-startup-id greenclip daemon
+exec --no-startup-id xinput disable 9
+exec --no-startup-id xss-lock -- betterlockscreen -l ~/.wallpaper/24.png --text "D4rkC4rl | Locked"
